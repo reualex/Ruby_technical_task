@@ -31,8 +31,8 @@ def general_rules(items, total)
     total += item[:total_price]
   end
 
-  if total.send(rule[:math_method], rule[:condition])
-    return total - rule[:discount]
+  if total.send(rule[:condition_method], rule[:condition])
+    return total = total.send(rule[:operation], rule[:discount])
   else
     return total
   end
