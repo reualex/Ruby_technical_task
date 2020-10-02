@@ -4,7 +4,6 @@ class Checkout
 
 def initialize(rules)
   @rules = rules
-  p "Rules: #{@rules}"
 end
 
 def scan(item)
@@ -49,21 +48,6 @@ end
 def total
   @total ||= 0
   @total = general_rules(@items, @total)
-  p "TOTAL: #{@total}"
 end
 
 end
-
-rules = Rules.rules
-@co = Checkout.new(rules)
-@co.scan(A)
-@co.scan(A)
-@co.scan(A)
-@co.scan(A)
-@co.scan(B)
-@co.scan(B)
-@co.scan(B)
-@co.scan(A)
-@co.scan(A)
-@co.scan(A)
-@co.total
