@@ -25,16 +25,31 @@ def scan(item)
 
 end
 
+def general_rules(items, total)
+  rule = @rules[:total]
+  items.values.each do |item|
+    total += item[:total_price]
+  end
+
+  if total.send(rule[:math_method], rule[:condition])
+    return total - rule[:discount]
+  else
+    return total
+  end
+end
+
 def total
   @total ||= 0
-  @items.values.each do |item|
-    @total += item[:total_price]
-  end
+  @total = general_rules(@items, @total)
+  p "TOTAL: #{@total}"
 end
 
 end
 
 rules = Rules.rules
 @co = Checkout.new(rules)
-@co.scan(A)
+@co.scan(C)
+@co.scan(C)
+@co.scan(C)
+@co.scan(C)
 @co.total
