@@ -22,8 +22,16 @@ def scan(item)
     @items[item.type][:count] += 1
     @items[item.type][:total_price] += item.price
   end
-
+  proceed_discount(@rules[item.type.to_sym], @items[item.type])
 end
+
+def proceed_discount(rule, item)
+  unless (rule.nil?)
+      if item[:count].send(rule[:condition_method], rule[:condition]).zero?
+        item[:total_price] = item[:total_price].send(rule[:operation], rule[:discount])
+      end
+    end
+  end
 
 def general_rules(items, total)
   rule = @rules[:total]
@@ -48,8 +56,14 @@ end
 
 rules = Rules.rules
 @co = Checkout.new(rules)
-@co.scan(C)
-@co.scan(C)
-@co.scan(C)
-@co.scan(C)
+@co.scan(A)
+@co.scan(A)
+@co.scan(A)
+@co.scan(A)
+@co.scan(B)
+@co.scan(B)
+@co.scan(B)
+@co.scan(A)
+@co.scan(A)
+@co.scan(A)
 @co.total

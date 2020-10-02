@@ -5,12 +5,14 @@ class Rules
           condition_method: :%,
           condition: 3,
           discount: 15,
+          operation: :-
         },
 
       B: {
           condition_method: :%,
           condition: 2,
           discount: 5,
+          operation: :-
         },
 
       total: {
