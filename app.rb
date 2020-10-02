@@ -1,6 +1,11 @@
 class Checkout
  require './items.rb'
+ require './rules.rb'
 
+def initialize(rules)
+  @rules = rules
+  p "Rules: #{@rules}"
+end
 
 def scan(item)
   @items ||= {}
@@ -28,3 +33,8 @@ def total
 end
 
 end
+
+rules = Rules.rules
+@co = Checkout.new(rules)
+@co.scan(A)
+@co.total
