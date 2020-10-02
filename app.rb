@@ -20,5 +20,11 @@ def scan(item)
 
 end
 
+def total
+  @total ||= 0
+  @items.values.each do |item|
+    @total += item[:total_price]
+  end
 end
 
+end
