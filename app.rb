@@ -10,7 +10,14 @@ def scan(item)
     count: 1,
     total_price: item.price,
   }
-  @items = @items.merge({item.type => @item})
+
+  unless @items.has_key?(item.type)
+    @items = @items.merge({item.type => @item})
+  else
+    @items[item.type][:count] += 1
+    @items[item.type][:total_price] += item.price
+  end
+
 end
 
 end
